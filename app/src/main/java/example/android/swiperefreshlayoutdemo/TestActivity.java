@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,8 @@ import utils.NewsFlow;
 
 public class TestActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
 
-    public static String DEMOURL = "http://10.210.228.69:8010/content_recomm?duid=102232001&apprid=4&nr=2";
+    //public static String DEMOURL = "http://10.210.228.69:8010/content_recomm?duid=102232001&apprid=4&nr=10&clear=true";
+    public static String DEMOURL = "http://192.168.0.103:4343/in2.html";
 
     public static List<News> listData = new ArrayList<News>();
 
@@ -36,17 +38,20 @@ public class TestActivity extends Activity implements SwipeRefreshLayout.OnRefre
 
     private Handler getNewsHandler = new Handler(){
         public void handleMessage(android.os.Message msg) {
+            Log.d("Handler.handleMessage","begin>>>>>>>>>>>>>>>");
             String jsonData = (String) msg.obj;
-            System.out.println(jsonData);
+            System.out.println("handleMessage begin = "+jsonData);
 
             //parser news from given json string
             List<News> listNews = NewsFlow.LoadNewsFlowFromString(jsonData);
 
             //add new news gotten from url
-            listData.addAll(listNews);
+//            listData.addAll(listNews);
+            listData.addAll(0,listNews);
 
             //notify it's changed
             testAdapter.notifyDataSetChanged();
+            Log.d("Handler.handleMessage","end<<<<<<<<<<<<<<<");
         };
     };
 
@@ -74,12 +79,10 @@ public class TestActivity extends Activity implements SwipeRefreshLayout.OnRefre
 
     @Override
     public void onRefresh() {
-        System.out.println("onRefresh is called  start");
-
+        Log.d("onRefresh", "begining>>>>>>>>>");
         HttpUtils.getNewsJSON(DEMOURL, getNewsHandler);
         swipeRefreshLayout.setRefreshing(false);
-
-        System.out.println("onRefresh is called  end");
+        Log.d("onRefresh", "end<<<<<<<<<<<<<<<");
     }
 
     @Override

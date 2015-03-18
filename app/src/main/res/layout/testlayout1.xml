@@ -3,32 +3,22 @@
     android:layout_width="wrap_content"
     android:layout_height="match_parent">
 
-    <com.android.volley.toolbox.NetworkImageView
-        android:id="@+id/pic"
-        android:layout_width="85dp"
-        android:layout_height="85dp"
-        android:src="@drawable/bdlogo"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        />
-
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="Large title"
-        android:layout_toRightOf="@+id/pic"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="10dp"
         />
 
     <TextView
         android:id="@+id/summary"
-        android:layout_toRightOf="@+id/pic"
         android:layout_below="@+id/title"
         android:text="summary"
         android:textColor="@color/material_blue_grey_800"
         android:layout_width="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_height="wrap_content" />
 
     <TextView

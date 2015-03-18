@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">swipeRefreshLayoutDemo</string>
-
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_test">TestActivity</string>
     <string name="title_activity_browser">browser</string>
+    <string name="title_activity_guide">guide</string>
+    <string name="hostURL" formatted="false">http://10.210.228.69:8010/content_recomm?duid=102232001e&amp;apprid=4&amp;nr=10&amp;clear=tru</string>
 </resources>

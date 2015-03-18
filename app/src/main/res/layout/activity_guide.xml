@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="example.android.swiperefreshlayoutdemo.guideActivity">
+
+    <TextView
+        android:id="@+id/tvUID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="UserID:"
+        android:paddingTop="100dp"/>
+
+    <EditText
+        android:id="@+id/etUID"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="95dp"
+        android:text="uid007"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/port" />
+
+    <Switch
+        android:id="@+id/mySwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="不看历史"
+        android:layout_marginTop="20dp"
+        android:layout_below="@id/tvUID" />
+
+    <TextView
+        android:id="@+id/tvIP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mySwitch"
+        android:text="ServerIP"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/host"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mySwitch"
+        android:layout_marginLeft="20dp"
+        android:layout_toRightOf="@id/tvIP"
+        android:text="202.10.13.24"/>
+
+    <TextView
+        android:id="@+id/tvPort"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvIP"
+        android:text="Port"
+        android:layout_marginTop="20dp"/>
+    <EditText
+        android:id="@+id/port"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/host"
+        android:layout_marginLeft="30dp"
+        android:layout_toRightOf="@id/tvPort"
+        android:text="80"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="reset"
+        android:id="@+id/button"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/port"
+        android:layout_toEndOf="@+id/tvPort" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/button2"
+        android:layout_alignTop="@+id/button"
+        android:layout_centerHorizontal="true" />
+
+</RelativeLayout>

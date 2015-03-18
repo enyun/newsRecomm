@@ -166,21 +166,22 @@ public class NewsFlow{
 
 	public static void main(String[] args) {
 
-        String s = loadTxt("/Users/admin/Documents/workspace/t/src/t/jin");
-        List<News> listNews = NewsFlow.LoadNewsFlowFromString(s);
-        for (int i=0; i<listNews.size(); ++i) {
-            //System.out.println(listNews.get(i));
-            News news = listNews.get(i);
-            System.out.println("title = "+news.getTitle());
-            System.out.println("url = "+news.getUrl());
-            System.out.println("ctime = "+news.getCtime());
+        for(int t=0; t<5; ++t) {
+            String s = loadTxt("/Users/admin/work/java_lib/in2.html");
+            List<News> listNews = NewsFlow.LoadNewsFlowFromString(s);
+            for (int i = 0; i < listNews.size(); ++i) {
+                //System.out.println(listNews.get(i));
+                News news = listNews.get(i);
+                System.out.println("title = " + news.getTitle());
+                System.out.println("url = " + news.getUrl());
+                System.out.println("ctime = " + news.getCtime());
+                System.out.println("getImgCnt = " + news.getImgCnt());
 
-            if (news.getImgList().size()>0){
-                System.out.println("pic = "+news.getImgList().get(0).getUrl());
-            }else
-                System.out.println("nopic = ");
+                for (int j = 0; j < news.getImgList().size(); ++j) {
+                    System.out.println("pic = " + news.getImgList().get(j).getUrl());
+                }
+            }
         }
-
 //		System.out.println("hello world");
 //
 //		String s = loadTxt("/Users/admin/Documents/workspace/t/src/t/jin");

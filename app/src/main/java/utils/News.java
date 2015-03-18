@@ -28,6 +28,17 @@ public class News {
         this.ctime = ctime;
     }
 
+    public int getImgCnt(){
+        return imgList.size();
+//        int num = 0;
+//        for (int i=0; i<imgList.size(); ++i){
+//            Img img = imgList.get(i);
+//            if (img.getWidth() > 2 && img.getHeight() > 2)
+//                num+=1;
+//        }
+//        return num;
+    }
+
     public String toString(){
         String ret = "@Cake: docid="+docid+" url="+url+" title="+title;
         String imgStr = "";
