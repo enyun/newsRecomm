@@ -11,7 +11,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,7 +28,7 @@ import utils.News;
 import utils.NewsFlow;
 
 
-public class TestActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener {
+public class TestActivity extends Activity implements SwipeRefreshLayout.OnRefreshListener, AdapterView.OnItemClickListener, View.OnClickListener {
 
     //public static String DEMOURL = "http://10.210.228.69:8010/content_recomm?duid=102232001&apprid=4&nr=10&clear=true";
     public static String DEMOURL = "http://192.168.0.103:4343/in2.html";
@@ -35,30 +38,42 @@ public class TestActivity extends Activity implements SwipeRefreshLayout.OnRefre
     private ListView listView;
     private TestAdapter testAdapter;
     private SwipeRefreshLayout swipeRefreshLayout;
+    private EditText editText;
+    Button button;
+    private Handler getNewsHandler;
 
-    private Handler getNewsHandler = new Handler(){
-        public void handleMessage(android.os.Message msg) {
-            Log.d("Handler.handleMessage","begin>>>>>>>>>>>>>>>");
-            String jsonData = (String) msg.obj;
-            System.out.println("handleMessage begin = "+jsonData);
+    {
+        getNewsHandler = new Handler() {
+            public void handleMessage(android.os.Message msg) {
+                Log.d("Handler.handleMessage", "begin>>>>>>>>>>>>>>>");
+                String jsonData = (String) msg.obj;
+                System.out.println("handleMessage begin = " + jsonData);
 
-            //parser news from given json string
-            List<News> listNews = NewsFlow.LoadNewsFlowFromString(jsonData);
+                //parser news from given json string
+                List<News> listNews = NewsFlow.LoadNewsFlowFromString(jsonData);
 
-            //add new news gotten from url
+                //add new news gotten from url
 //            listData.addAll(listNews);
-            listData.addAll(0,listNews);
+                listData.addAll(0, listNews);
 
-            //notify it's changed
-            testAdapter.notifyDataSetChanged();
-            Log.d("Handler.handleMessage","end<<<<<<<<<<<<<<<");
+                //notify it's changed
+                testAdapter.notifyDataSetChanged();
+                Log.d("Handler.handleMessage", "end<<<<<<<<<<<<<<<");
+            }
+
+            ;
         };
-    };
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_test);
+
+        editText = (EditText) findViewById(R.id.etHost);
+        editText.setText(DEMOURL);
+        button = (Button) findViewById(R.id.btnOK);
+        button.setOnClickListener(this);
 
         swipeRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.swipe_test);
         swipeRefreshLayout.setOnRefreshListener(this);
@@ -91,5 +106,16 @@ public class TestActivity extends Activity implements SwipeRefreshLayout.OnRefre
         Intent intent = new Intent(this, BrowserActivity.class);
         intent.putExtra("content_url", news.getUrl());
         startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View v) {
+        listData.clear();
+        testAdapter.notifyDataSetChanged();
+
+        String url = editText.getText().toString();
+        Toast.makeText(this,"loading "+url, Toast.LENGTH_SHORT).show();
+
+        HttpUtils.getNewsJSON(url, getNewsHandler);
     }
 }
